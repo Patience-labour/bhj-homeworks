@@ -1,5 +1,5 @@
 let time = 59;
-let countDownElement = document.getElementById('timer');
+const countDownElement = document.getElementById('timer');
 
 function updateTime() {
     time--;

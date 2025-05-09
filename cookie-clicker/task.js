@@ -1,21 +1,14 @@
-let click = document.getElementById('clicker__counter');
+const click = document.getElementById('clicker__counter');
 let value = 0;
-let isPush = true;
-let clickBtn = document.getElementById('cookie');
+const isPush = true;
+const clickBtn = document.getElementById('cookie');
 
 function clicker() {
     value++;
     click.innerHTML = value;
 
-    if(isPush) {
-        clickBtn.style.width = '250px';
-        clickBtn.style.height = '160px';
-    } else {
-        clickBtn.style.width = '200px';
-        clickBtn.style.height = '128px';
-    }
-
-    isPush = !isPush;
+    clickBtn.style.width =  (value % 2 !== 0) ? '250px' : '200px';
+    clickBtn.style.height = (value % 2 !== 0) ? '160px' : '128px';
     
 }
 
