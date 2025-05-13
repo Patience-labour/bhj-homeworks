@@ -17,19 +17,19 @@ class Game {
   }
 
   registerEvents() {
+    const symbolCompration = (event) => {
+      if (event.key === this.currentSymbol.textContent) {
+        this.success();
+        return;
+      }
 
-    const words = document.querySelectorAll('.symbol');
-    words.forEach((word) => {
-      word.addEventListener('keydown', function (e) {
-        const currentSymbol = this.currentSymbol;
-        if (e.key.toLowerCase() === currentSymbol.textContent.toLowerCase()) {
-          this.success();
-        } else {
-          this.fail();
-        }
-      })
-    })
+      if (event.key === 'Shift' || event.key === 'Alt' || event.key === 'Control') {
+        return;
+      }
+      this.fail();
+    }
 
+    document.addEventListener('keyup', symbolCompration);
     /*
       TODO:
       Написать обработчик события, который откликается
