@@ -14,8 +14,8 @@ document.addEventListener('click', (event) => {
 
     book.classList.remove('book_fs-small', 'book_fs-big');
 
-    if (fontSize === 'small') {
-      book.classList.add('book_fs-small');
+    if (fontSize) {
+      book.classList.add(`book_fs-${fontSize}`);
     } else if (fontSize === 'big') {
       book.classList.add('book_fs-big');
     }
