@@ -1,21 +1,32 @@
 const tooltips = document.querySelectorAll('.has-tooltip');
 
 tooltips.forEach(tooltip => {
-    tooltip.addEventListener('click', e => {
-        e.preventDefault();
+  tooltip.addEventListener('click', e => {
+    e.preventDefault();
 
-        let tooltipDiv = document.querySelector('.tooltip');
+    document.querySelectorAll('.tooltip_active').forEach(activeTooltip => {
+      activeTooltip.classList.remove('tooltip_active');
+    });
 
-        tooltipDiv = document.createElement('div');
-        tooltipDiv.classList.add('tooltip');
-        tooltipDiv.textContent = tooltip.getAttribute('title');
+    let tooltipDiv = tooltip.nextElementSibling;
+    if (!tooltipDiv || !tooltipDiv.classList.contains('tooltip')) {
+      tooltipDiv = document.createElement('div');
+      tooltipDiv.className = 'tooltip';
+      tooltip.after(tooltipDiv);
+    }
 
-        tooltip.append(tooltipDiv);
+    const tooltipText = tooltip.getAttribute('title');
+    const isDoubleClick = (tooltipDiv.classList.contains('tooltip_active') && tooltipDiv.textContent === tooltipText);
 
-        const elementRect = tooltip.getBoundingClientRect();
-        
-        tooltipDiv.style.left = elementRect.left + 'px';
+    if (isDoubleClick) {
+      tooltipDiv.classList.toggle('tooltip_active');
+      return;
+    }
 
-        tooltipDiv.classList.toggle('tooltip_active');
-    })
-})
+    tooltipDiv.textContent = tooltipText;
+    const elementRect = tooltip.getBoundingClientRect();
+    tooltipDiv.style.left = elementRect.left + 'px';
+    tooltipDiv.style.top = elementRect.bottom + 'px';
+    tooltipDiv.classList.add('tooltip_active');
+  });
+});
