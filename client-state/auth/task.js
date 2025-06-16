@@ -25,3 +25,12 @@ signinForm.addEventListener('submit', async (e) => {
         alert('Неверный логин или пароль');
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const userId = localStorage.getItem('user_id');
+    if (userId) {
+        userIdSpan.textContent = userId;
+        signinBlock.classList.remove('signin_active');
+        welcomeBlock.classList.add('welcome_active');
+    }
+});
